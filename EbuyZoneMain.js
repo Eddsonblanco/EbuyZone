@@ -30,7 +30,7 @@ function options() {
         {
           name: "actions",
           type: "rawlist",
-          message: "Please choose from the following actions.",
+          message: chalk.rgb(15, 100, 204).inverse("           Hi Seller choose a option           "),
           choices: ["View Products for Sale", "View Low Inventory", "Add New Product", "Delete a Product"]
         },
       ])
@@ -66,22 +66,22 @@ function addProduct() {
             {
             name: "product",
             type: "input",
-            message: "Enter new product",
+            message: chalk.rgb(196, 69, 235).inverse("Enter new product"),
             },
             {
             name: "department",
             type: "input",
-            message: "Enter department",
+            message: chalk.rgb(196, 69, 235).inverse("Enter department"),
             },
             {
             name: "price",
             type: "input",
-            message: "Enter price",
+            message: chalk.rgb(196, 69, 235).inverse("Enter price"),
             },
             {
             name: "quantity",
             type: "input",
-            message: "Enter quantity",
+            message: chalk.rgb(196, 69, 235).inverse("Enter quantity"),
             }
         ]).then(function(answer) {
             connection.query("INSERT INTO product SET ?", 
@@ -105,8 +105,8 @@ function next() {
         {
           name: "actions",
           type: "rawlist",
-          message: "What would you like to do next?",
-          choices: [ "Add New Product", "Exit"]
+          message:chalk.rgb(15, 100, 204).inverse("        What would you like to do next?        "),
+          choices: [ "Add New Product", chalk.red("Exit")]
         },
       ])
       .then(function(answer) {
@@ -124,9 +124,9 @@ function viewProducts() {
         var table = new Table({
           head: ["ID", "item Name", "category", "Price", "Quantity"]
         })
-      console.log("<--                                              -->")
-      console.log("                       For sale                    :")
-      console.log("<--                                              -->")
+      console.log("   ")
+      console.log(chalk.underline.red('                  For Sale                        ') )
+      console.log("   ")
       for (var i = 0; i < results.length; i++) {
         table.push([results[i].id, results[i].item_name, results[i].category, results[i].price, results[i].quantity]);
       }
@@ -140,9 +140,9 @@ function lowInventory() {
       var table = new Table({
         head: ["ID", "item Name", "category", "Price", "Quantity"]
       })
-      console.log("<--                                              -->")
-      console.log("                       For sale                    :")
-      console.log("<--                                              -->")
+      console.log("   ")
+      console.log(chalk.underline.red('                Low Inventario                   ') )
+      console.log("   ")
       for (var i = 0; i < results.length; i++) {
         table.push([results[i].id, results[i].item_name, results[i].category, results[i].price, results[i].quantity]);
       }
